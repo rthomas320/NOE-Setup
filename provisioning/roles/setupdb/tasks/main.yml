@@ -1,0 +1,25 @@
+---
+- name: Install MariaDB
+  dnf:
+    name:
+      - mariadb-server
+    update_cache: yes
+    disable_gpg_check: yes
+  become: yes
+
+- name: Install mysql-python-connector
+  pip:
+    name: PyMySQL
+  become: yes
+
+- name: Enable Servics and Start MariaDB
+  systemd:
+    daemon-reload: yes
+    name: mariadb
+    state: started
+    enabled: yes
+  become: yes
+
+- include: mysql_secure_installation.yml
+- include: provision_db.yml 
+

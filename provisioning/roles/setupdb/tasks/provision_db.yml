@@ -1,0 +1,75 @@
+---
+- name: Reload privilege tables
+  command: 'mysql -ne "{{ item }}"'
+  with_items:
+    - FLUSH PRIVILEGES
+  changed_when: False
+  become: yes
+
+- name: Copy database provisioning, reprovisioning, and stored procedure scripts to local machine
+  copy:
+    src: "{{ item }}"
+    dest: /opt/nifi/db_scripts/
+    mode: 755
+  with_items:
+    - prov/delete_tables.sql
+    - prov/delete_data.sql
+    - prov/create_tables.sql
+    - prov/add_auto_increment_to_tables.sql
+    - prov/load_data.sql
+    - prov/siaftprocs.sql
+    - prov/re_provision.sh
+  become: yes
+
+- name: Copy report generation scripts to local machine
+  copy:
+    src: "{{ item }}"
+    dest: /home/nifi/queries/
+    mode: 755
+  with_items:
+    - queries/CSVIndicatorReports.sh
+    - queries/CylanceIndicators.sql
+    - queries/FileCounts.sql
+    - queries/GlasswallIndicators.sql
+    - queries/PrePostCountsAll.sql
+    - queries/PrePostCountsSuspicious.sql
+    - queries/ReversingLabsIndicators.sql
+    - queries/SuspiciousFileReports.sh
+    - queries/SuspiciousFileResults.sql
+    - queries/TabbedIndicatorReports.sh
+  become: yes
+
+- name: Create siaft database
+  mysql_db:
+    name: siaft
+    state: present
+  become: yes
+  
+- name: Add vagrant user to database
+  mysql_user:
+    name: vagrant
+    password: vagrant
+    priv: 'siaft.*:ALL'
+  become: yes
+
+- name: Delete siaft database tables
+  shell: mysql siaft < "{{ item }}"
+  with_items:
+    - /opt/nifi/db_scripts/delete_tables.sql
+  become: yes
+
+- name: Create siaft database tables, load data and stored procedures
+  shell: mysql siaft < "{{ item }}"
+  with_items:
+    - /opt/nifi/db_scripts/create_tables.sql
+    - /opt/nifi/db_scripts/add_auto_increment_to_tables.sql
+    - /opt/nifi/db_scripts/load_data.sql
+    - /opt/nifi/db_scripts/siaftprocs.sql
+  become: yes
+
+- name: Allow user vagrant to login remotely
+  command: 'mysql -ne "{{ item }}"'
+  with_items:
+    - GRANT ALL PRIVILEGES ON *.* to 'vagrant'@'localhost'
+  changed_when: False
+  become: yes

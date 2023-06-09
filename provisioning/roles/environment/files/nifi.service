@@ -1,0 +1,14 @@
+[Unit]
+Description=Apache NiFi
+After=network.target
+
+[Service]
+Type=forking
+Environment=JAVA_HOME=/usr/lib/jvm/java
+User=nifi
+Group=nifi
+ExecStart=/opt/nifi-latest/bin/nifi.sh start
+ExecStop=/opt/nifi-latest/bin/nifi.sh stop
+
+[Install]
+WantedBy=multi-user.target

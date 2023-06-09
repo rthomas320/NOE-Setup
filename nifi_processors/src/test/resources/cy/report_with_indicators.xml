@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cylance product="V" version="2.7.0.1">
+	<files>
+		<file sha256="64e226bc58ee7429c97eee9dd66967bdbb2d981fdb4f4fd98063c723298ac81b" filename="E:\bad_dataset_sorted\exe\64e226bc58ee7429c97eee9dd66967bdbb2d981fdb4f4fd98063c723298ac81b.exe" score="-1.00" >
+			<indicator>An.12</indicator>
+			<indicator>Dc.12</indicator>
+		</file>
+	</files>
+	<legend>
+		<An.1 category="Anomalies" name="16bitSubsystem">This object utilizes the 16 bit subsystem. Malware uses this to exist in a less secure and less monitored part of the operating system, and frequently to perform privilege escalation attacks.</An.1>
+		<An.2 category="Anomalies" name="Anachronism">This PE appears to be lying about when it was written, which is atypical for professionally written software.</An.2>
+		<An.3 category="Anomalies" name="AppendedData">This PE has some extra content appended to it, beyond the normal areas of the file. Appended data can frequently be used to embed malicious code or data and is frequently overlooked by protection systems.</An.3>
+		<An.4 category="Anomalies" name="Base64Alphabet">This object contains evidence of usage of BASE64 Encoding of an alphabet.  Malware does this to attempt to avoid common detection, or to attack other programs using BASE64 encoding.</An.4>
+		<An.5 category="Anomalies" name="CommandlineArgsImport">This sample imports functions that can be used to read arguments from a command line. Malware uses this to collect information on subsequent runs.</An.5>
+		<An.6 category="Anomalies" name="ManifestMismatch">This object demonstrates an inconsistency in its manifest.  Malware does this to avoid detection, but rarely covers its tracks deeply.</An.6>
+		<An.7 category="Anomalies" name="NontrivialDLLEP">This PE is a DLL with a nontrivial entry point. This is common among DLLs, but a malicious DLL may use its entry point to take up residence in a process.</An.7>
+		<An.8 category="Anomalies" name="PossibleBAT">This object contains evidence of having a standard windows batch file included.  Malware does this to avoid common scanning techniques and to provide persistence.</An.8>
+		<An.9 category="Anomalies" name="PossibleDinkumware">This object shows evidence of including some components from DinkumWare.  Dinkumware is frequently used in various malware components.</An.9>
+		<An.10 category="Anomalies" name="RaiseExceptionImports">This object imports functions used to raise exceptions within a program.  Malware does this to implement tactics that make standard dynamic code analysis difficult to follow.</An.10>
+		<An.11 category="Anomalies" name="ResourceAnomaly">This object contains an anomaly in the resource section.  Malware frequently contains malformed or other odd bits in the resource section of a DLL.</An.11>
+		<An.12 category="Anomalies" name="RWXSection">This PE may contain modifiable code, which is at best unorthodox and at worst symptomatic of a virus infection.  Frequently, this feature implies that the object has been built using something other than a standard compiler, or has been modified after it was originally built.</An.12>
+		<An.13 category="Anomalies" name="SuspiciousPDataSection">This PE is hiding something in its "pdata" area, and we're not sure what.  The pdata section in a PE file is generally used for process runtime structures, but this particular object contains something else.</An.13>
+		<An.14 category="Anomalies" name="SuspiciousRelocSection">This PE is hiding something in its "relocations" area, and we're not sure what. The relocations area in a PE file is generally used for relocating particular symbols, but this particular object contains something else.</An.14>
+		<An.15 category="Anomalies" name="VersionAnomaly">This object has issues with how it presents its version information.  Malware does this to avoid detection.</An.15>
+		<An.16 category="Anomalies" name="AutoitDbgPrivilege">AutoIt script is capable of performing debug activities.</An.16>
+		<An.17 category="Anomalies" name="AutoitManyDllCalls">AutoIt script uses many external dll calls. AutoIt runtime already has many common functions, therefore using additional functionality from external dlls may be a sign of maliciousness.</An.17>
+		<An.18 category="Anomalies" name="AutoitMutex">AutoIt script creates synchronization objects. This is often used by malware to prevent multiple infection of the same target.</An.18>
+		<An.19 category="Anomalies" name="AutoitProcessCarving">AutoIt script is likely performing process carving to run code that appears to come from another process. This is often done to hinder detection.</An.19>
+		<An.20 category="Anomalies" name="AutoitProcessInjection">AutoIt script is likely performing process injection to run code in other processes context to possibly stay undetected or steal data.</An.20>
+		<An.21 category="Anomalies" name="AutoitRegWrite">AutoIt script writes into the Windows registry.</An.21>
+		<An.22 category="Anomalies" name="CommandlineArgsImport">This sample imports functions that can be used to read arguments from a command line.Malware uses this to collect information on subsequent runs.</An.22>
+		<An.23 category="Anomalies" name="ComplexMultipleFilters">The document contains multiple streams with multiple filters.</An.23>
+		<An.24 category="Anomalies" name="ComplexObfuscatedEncoding">The document contains an anomalously high number of obfuscated names.</An.24>
+		<An.25 category="Anomalies" name="ComplexUnsupportedVersionEmbeddedFiles">The document uses EmbeddedFiles features from newer versions of the PDF standard than the document declares.</An.25>
+		<An.26 category="Anomalies" name="ComplexUnsupportedVersionFlate">The document uses the FlateDecode feature from newer versions of the PDF standard than the document declares.</An.26>
+		<An.27 category="Anomalies" name="ComplexUnsupportedVersionJbig2">The document uses the JBIG2Decode feature from newer versions of the PDF standard than the document declares.</An.27>
+		<An.28 category="Anomalies" name="ComplexUnsupportedVersionJs">The document uses JavaScript features from newer versions of the PDF standard than the document declares.</An.28>
+		<An.29 category="Anomalies" name="ComplexUnsupportedVersionXFA">The document uses XFA features from newer versions of the PDF standard than the document declares.</An.29>
+		<An.30 category="Anomalies" name="ComplexUnsupportedVersionXobject">The document uses XOBject features from newer versions of the PDF standard than the document declares.</An.30>
+		<An.31 category="Anomalies" name="ContainsFlash">The document contains flash objects.</An.31>
+		<An.32 category="Anomalies" name="ContainsPE">Indicates embedded executable files.</An.32>
+		<An.33 category="Anomalies" name="ContainsU3D">The document contains U3D objects.</An.33>
+		<An.34 category="Anomalies" name="InvalidCodePageUsed">Document uses an invalid or unrecognized locale, possibly to avoid detection.</An.34>
+		<An.35 category="Anomalies" name="InvalidData">Document metadata is obviously bogus or corrupt.</An.35>
+		<An.36 category="Anomalies" name="InvalidStructure">Document structure is not valid – sizes, metadata, or internal sector allocation table is wrong.May be indicative of an exploit.</An.36>
+		<An.37 category="Anomalies" name="NullValuesInStrings">Some strings within the document contain null-characters in the middle.</An.37>
+		<An.38 category="Anomalies" name="PDFParserArraysContainsNullCount">The document contains an anomalously high number of Null values in arrays.</An.38>
+		<An.39 category="Anomalies" name="PDFParserArraysHeterogeneousCount">The document contains an anomalously high number of arrays containing different types of elements.</An.39>
+		<An.40 category="Anomalies" name="PDFParserMailtoURICount">The document contains an anomalously high number of email links (mailto:).</An.40>
+		<An.41 category="Anomalies" name="PDFParserMinPageCount">The document has an unusual structure of page objects - a high number of child page objects per node.</An.41>
+		<An.42 category="Anomalies" name="PDFParserNamesPoundNameMaxLength">The document may attempt to obfuscate its contents by using long encoded strings.</An.42>
+		<An.43 category="Anomalies" name="PDFParserNamesPoundNameMinLength">The document contains an anomalously high minimal length of an escaped name.</An.43>
+		<An.44 category="Anomalies" name="PDFParserNamesPoundNameTotalLength">The document may attempt to obfuscate its contents by storing much of its content in encoded strings.</An.44>
+		<An.45 category="Anomalies" name="PDFParserNamesPoundNameUpperCount">The document contains an anomalously high number of names escaped with uppercase hexadecimal characters.</An.45>
+		<An.46 category="Anomalies" name="PDFParserNamesPoundNameValidCount">The document contains an anomalously high number of valid escaped names.</An.46>
+		<An.47 category="Anomalies" name="PDFParserNamesPoundPerNameMaxCount">The document contains an anomalously high max number of escaped characters per single name.</An.47>
+		<An.48 category="Anomalies" name="PDFParserNamesPoundUnnecessaryCount">The document contains an anomalously high number of unnecessarily escaped names.</An.48>
+		<An.49 category="Anomalies" name="PDFParserNumbersLeadingDigitTallies8">The document contains an anomalously high number of numbers that start with 8 in decimal representation.</An.49>
+		<An.50 category="Anomalies" name="PDFParserNumbersPlusCount">The document contains an anomalously high number of numbers with explicit plus sign.</An.50>
+		<An.51 category="Anomalies" name="PDFParserNumbersRealMaxRawLength">The document contains an anomalously high max length of a real number.</An.51>
+		<An.52 category="Anomalies" name="PDFParserPageCounts">The document contains an anomalously high number of child page objects.</An.52>
+		<An.53 category="Anomalies" name="PDFParserPageObjectCount">The document contains an anomalously high number of page objects.</An.53>
+		<An.54 category="Anomalies" name="PDFParserSizeEOF">The document contains an anomalously long end of file sequence(s).</An.54>
+		<An.55 category="Anomalies" name="PDFParserStringsHexLowerCount">The document contains an anomalously high number of strings escaped with lowercase hexadecimal digits.</An.55>
+		<An.56 category="Anomalies" name="PDFParserStringsLiteralStringMaxLength">The document contains an anomalously high max length of a literal string.</An.56>
+		<An.57 category="Anomalies" name="PDFParserStringsOctalZeroPaddedCount">The document contains an anomalously high number of octal escaped characters in strings that are unnecessarily zero-padded.</An.57>
+		<An.58 category="Anomalies" name="PDFParserTrailerSpread">The document contains an anomalously large spread between trailer objects.</An.58>
+		<An.59 category="Anomalies" name="PDFParserWhitespaceCommentMaxLength">The document contains an anomalously high max length of a comment.</An.59>
+		<An.60 category="Anomalies" name="PDFParserWhitespaceCommentMinLength">The document contains unusual short comments that are not used by reader software.</An.60>
+		<An.61 category="Anomalies" name="PDFParserWhitespaceCommentTotalLength">The document contains an unusually large amount of commented out data.</An.61>
+		<An.62 category="Anomalies" name="PDFParserWhitespaceEOL0ACount">The document contains an anomalously high number of short end-of-line characters.</An.62>
+		<An.63 category="Anomalies" name="PDFParserWhitespaceWhitespace00Count">The document contains an anomalously high number of zero-bytes used as whitespace.</An.63>
+		<An.64 category="Anomalies" name="PDFParserWhitespaceWhitespace09Count">The document contains an anomalously high number of 09 bytes used as whitespace.</An.64>
+		<An.65 category="Anomalies" name="PDFParserWhitespaceWhitespaceLongestRun">The document contains an anomalously long whitespace area.</An.65>
+		<An.66 category="Anomalies" name="PDFParserWhitespaceWhitespaceTotalLength">The document contains an anomalously high amount of whitespace.</An.66>
+		<An.67 category="Anomalies" name="PDFParseru3DObjectsNamesAllNames">The document contains an anomalously high number of u3d objects.</An.67>
+		<An.68 category="Anomalies" name="PropertyImpropriety">Reports suspicious OOXML properties.</An.68>
+		<An.69 category="Anomalies" name="ReservedFieldsViolation">Document violates specification in terms of reserved fields usage.</An.69>
+		<An.70 category="Anomalies" name="SectorMalfeasance">Reports structural oddities with OLE sector allocation.</An.70>
+		<An.71 category="Anomalies" name="StringInvalid">One of the references to a string in a string table pointed to a negative offset.</An.71>
+		<An.72 category="Anomalies" name="StringTableNotTerminated">A string table was not terminated with a null byte. This could cause a fault at runtime due to a string that does not end.</An.72>
+		<An.73 category="Anomalies" name="StringTruncated">One of the references to a string in a string table pointed after end of file.</An.73>
+		<An.74 category="Anomalies" name="SuspiciousDirectoryNames">OLE directory names associated with badness.</An.74>
+		<An.75 category="Anomalies" name="SuspiciousDirectoryStructure">Reports oddities in the OLE directory structure.</An.75>
+		<An.76 category="Anomalies" name="SuspiciousEmbedding">Reports suspicious embedding of OLE.</An.76>
+		<An.77 category="Anomalies" name="SuspiciousVBA">Reports suspicious VBA code.</An.77>
+		<An.78 category="Anomalies" name="SuspiciousVBALib">Reports suspicious VBA library usage.</An.78>
+		<An.79 category="Anomalies" name="SuspiciousVBANames">Reports suspicious names associated with VBA structures.</An.79>
+		<An.80 category="Anomalies" name="SuspiciousVBAVersion">Reports suspicious VBA versioning.</An.80>
+		<An.81 category="Anomalies" name="SWFOddity">Reports certain usages of embedded SWF.</An.81>
+		<An.82 category="Anomalies" name="TooMalformedToProcess">Document is so malformed that it could not be parsed completely.</An.82>
+		<An.83 category="Anomalies" name="SuspiciousMetadata">Reports suspicious metadata.</An.83>
+		<Co.1 category="Collection" name="BrowserInfoTheft">This object contains evidence of an intent to read passwords stored in browser caches. Malware uses this to collect the passwords for exfiltration.</Co.1>
+		<Co.2 category="Collection" name="CredentialProvider">This object contains evidence of interaction with a credential provider, or the desire to appear as one.  Malware does this as credential providers get access to many types of sensitive data, such as usernames and passwords, and by acting as one they may be able to subvert the authentication integrity.</Co.2>
+		<Co.3 category="Collection" name="CurrentUserInfoImports">This object imports functions that are used to gather information about the currently logged in user.  Malware uses this to determine paths of action to escalate privileges and to better tailor attacks.</Co.3>
+		<Co.4 category="Collection" name="DebugStringImports">This object imports functions that are used to output debug strings. Typically this is disabled in production software, but left on in malware that is being tested.</Co.4>
+		<Co.5 category="Collection" name="DiskInfoImports">This object imports functions that can be used to gather details about volumes on the system.  Malware uses this in conjunction with listing to determine facts about the volumes in preparation for a further attack.</Co.5>
+		<Co.6 category="Collection" name="EnumerateFileImports">This object imports functions that are used to list files.  Malware uses this to look for sensitive data, or to find further points of attack.</Co.6>
+		<Co.7 category="Collection" name="EnumerateModuleImports">This object imports functions that can be used to list all of the DLLs a running process uses.  Malware uses this capability to locate and target specific libraries for loading into a process, and to map out a process it wishes to inject into.</Co.7>
+		<Co.8 category="Collection" name="EnumerateNetwork">This object demonstrates evidence of a capability to attempt to numerate connected networks and network adapters.  Malware will do this to determine where a target system lies in relation to others, and to look for possible lateral paths.</Co.8>
+		<Co.9 category="Collection" name="EnumerateProcessImports">This object imports functions that can be used to list all of the running processes on a system. Malware used this capability to locate processes to inject into or those that it wishes to delete.</Co.9>
+		<Co.10 category="Collection" name="EnumerateVolumeImports">This object imports functions that can be used to list the volumes on the system.  Malware uses this to find all of the areas it might need to search for data, or to spread an infection.</Co.10>
+		<Co.11 category="Collection" name="GinaImports">This object imports functions that are used to access Gina. Malware does this to attempt to breach the secure ctrl-alt-delete password entry system or other network login functions.</Co.11>
+		<Co.12 category="Collection" name="HostnameSearchImports">This object imports functions that are used to gather information about hostnames on the network and the hostname of the machine itself.  Malware uses this capability to better target further attacks or scan for new targets.</Co.12>
+		<Co.13 category="Collection" name="KeystrokeLogImports">This object imports functions that can capture and log keystrokes from the keyboard.  Malware uses this to capture and save keystrokes to find sensitive information such as passwords.</Co.13>
+		<Co.14 category="Collection" name="OSInfoImports">This object imports functions that are used to gather information about the current operating system.  Malware uses this to determine how to better tailor further attacks and to report information back to a controller.</Co.14>
+		<Co.15 category="Collection" name="PossibleKeylogger">This object contains evidence of keylogger type activity. Malware uses keyloggers to collect sensitive information from the keyboard.</Co.15>
+		<Co.16 category="Collection" name="PossiblePasswords">This object has evidence of including common passwords, or structure that would enable brute forcing common passwords. Malware uses this to attempt to further penetrate a network by accessing other resources via password.</Co.16>
+		<Co.17 category="Collection" name="ProcessorInfoWMI">This object imports functions that can be used to determine details about the processor.  Malware uses this to tailor attacks and exfiltrate this data to common command and control infrastructure.</Co.17>
+		<Co.18 category="Collection" name="RDPUsage">This object shows evidence of interacting with the Remote Desktop Protocol (RDP).  Malware frequently uses this to move laterally and to offer direct command and control functionality.</Co.18>
+		<Co.19 category="Collection" name="SystemDirImports">This object imports functions used to locate the system directory.  Malware does this to find where many of the installed system binaries are located, as it frequently hides among them.</Co.19>
+		<Co.20 category="Collection" name="UserEnvInfoImports">This object imports functions that are used to gather information about the environment of the current logged in user. Malware uses this to determine details about the logged in user and look for other intelligence that can be gleaned from the environment variables.</Co.20>
+		<Co.21 category="Collection" name="SpyString">Indicates possible spying on clipboard or user actions via accessibility API usage.</Co.21>
+		<DL.1 category="DataLoss" name="AbnormalNetworkActivity">This object implements a non-standard method of networking.  Malware does this to avoid detection of more common networking approaches.</DL.1>
+		<DL.2 category="DataLoss" name="ContainsBrowserString">This object contains evidence of attempting to create a custom UserAgent string.  Malware frequently uses common UserAgent strings to avoid detection in outgoing requests.</DL.2>
+		<DL.3 category="DataLoss" name="DownloadFileImports">This object imports functions that can be used to download files to the system.  Malware uses this as both a way to further stage an attack and to exfiltrate data via the outbound URL.</DL.3>
+		<DL.4 category="DataLoss" name="FirewallModifyImports">This object imports functions used to modify the local windows firewall.  Malware uses this to open holes and avoid detection.</DL.4>
+		<DL.5 category="DataLoss" name="HTTPCustomHeaders">This object contains evidence of the creation of other custom HTTP headers.  Malware does this to facilitate interactions with command and control infrastructures and to avoid detection.</DL.5>
+		<DL.6 category="DataLoss" name="IRCCommands">This object contains evidence of interaction with an IRC server. Malware commonly uses IRC to facilitate a command and control infrastructure.</DL.6>
+		<DL.7 category="DataLoss" name="MemoryExfiltrationImports">This object imports functions that can be used to read memory from a running process.  Malware uses this to determine proper places to insert itself, or to extract useful information from a running process’s memory, like passwords, credit cards, or other sensitive information.</DL.7>
+		<DL.8 category="DataLoss" name="NetworkOutboundImports">This object imports functions that can be used to send data out to the network or the general internet.  Malware uses this as a method for exfiltration of data or as a method for command and control.</DL.8>
+		<DL.9 category="DataLoss" name="PipeUsage">This object imports functions that allow the manipulation of named pipes. Malware uses this as a method of communication, and of data exfiltration.</DL.9>
+		<DL.10 category="DataLoss" name="RPCUsage">This object imports functions that allow it to interact with Remote Procedure Call (RPC) infrastructure.  Malware uses this to spread, or to send data to remote systems for exfiltration.</DL.10>
+		<DL.11 category="DataLoss" name="BrowserPluginString">Indicates capability to enumerate or install browser plugins.</DL.11>
+		<Dc.1 category="Deception" name="AntiVM">This object demonstrates features that can be used to determine if the process is running in a virtual machine.  Malware does this to avoid running in virtualized sandboxes that are becoming more common.</Dc.1>
+		<Dc.2 category="Deception" name="CabinentUsage">This object shows evidence of containing a CAB file.  Malware does this to package sensitive components in a way that many detection systems can’t see.</Dc.2>
+		<Dc.3 category="Deception" name="ContainsEmbeddedDocument">This object contains a document embedded inside the object.  Malware can use this to spread an attack to multiple sources, or to otherwise hide its true form.</Dc.3>
+		<Dc.4 category="Deception" name="CryptoKeys">This object contains evidence of having an embedded cryptographic key.  Malware does this to avoid detection and perhaps as authentication with remote services.</Dc.4>
+		<Dc.5 category="Deception" name="DebugCheckImports">This object imports functions that would allow it to act like a debugger.  Malware uses this capability to read and write from other processes.</Dc.5>
+		<Dc.6 category="Deception" name="EmbeddedPE">This PE has additional PEs within it, which is usually only the case with software installation programs.   Frequently malware will embed a PE file that it then drops to disk and executes.  This technique is often used to avoid protection scanners by packaging binaries in a format that the underlying scanning technology doesn’t understand.</Dc.6>
+		<Dc.7 category="Deception" name="EncodedPE">This PE has additional PEs hidden within it, which is extremely suspicious.  Similar to the last, but uses an encoding scheme to attempt to further hide the binary inside the object.</Dc.7>
+		<Dc.8 category="Deception" name="ExecuteDLL">This object contains evidence of the capability to execute a DLL using common methods.  Malware does this as a method to avoid common detection practices.</Dc.8>
+		<Dc.9 category="Deception" name="FakeMicrosoft">This PE claims to be written by Microsoft, but it doesn't look like a Microsoft PE. Malware commonly masquerades as Microsoft PEs in order to look inconspicuous.</Dc.9>
+		<Dc.10 category="Deception" name="HTTPCustomUserAgent">This object contains evidence of manipulation of the browser UserAgent.  Malware does this to facilitate interactions with command and control infrastructures and to avoid detection.</Dc.10>
+		<Dc.11 category="Deception" name="InjectProcessImports">This PE has the ability to inject code into other processes.  This capability frequently implies that a process is attempting to be deceptive or hostile in some way.</Dc.11>
+		<Dc.12 category="Deception" name="InvisibleEXE">This PE appears to run invisibly, but it isn't a background service.  It might be designed to remain hidden.</Dc.12>
+		<Dc.13 category="Deception" name="MSCertStore">This object shows evidence of interacting with the core windows certificate store.   Malware does this to collect credentials and insert rogue keys into the stream to facilitate things like man in the middle attacks.</Dc.13>
+		<Dc.14 category="Deception" name="MSCryptoImports">This object imports functions to use the core windows crypto library.  Malware will use this to leverage the locally installed cryptography so it doesn’t need to carry its own around.</Dc.14>
+		<Dc.15 category="Deception" name="ProtectionExamination">This object seems to be looking for common protection systems.  Malware does this to initiate an anti-protection action tailored to that installed on the system.</Dc.15>
+		<Dc.16 category="Deception" name="SelfExtraction">This object seems to be a self-extracting archive.  Malware frequently uses this tactic to obfuscate their true intentions.</Dc.16>
+		<Dc.17 category="Deception" name="ServiceDLL">This object seems to be a service DLL.  Service DLL’s are loaded in svchost.exe processes and are a common persistence methodology for malware.</Dc.17>
+		<Dc.18 category="Deception" name="TempFileImports">This object imports functions used to access and manipulate temporary files.  Malware does this as temporary files tend to avoid detection.</Dc.18>
+		<Dc.19 category="Deception" name="UsesCompression">This object seems to have portions of the code that appear to be compressed.  Malware uses these techniques to avoid detection.</Dc.19>
+		<Dc.20 category="Deception" name="VirtualProtectImports">This object imports functions that are used to modify the memory of a running process.  Malware does this to inject itself into running processes.</Dc.20>
+		<Dc.21 category="Deception" name="AddedHeader">Document contains an add-obfuscated PE header that may be a hidden malicious payload.</Dc.21>
+		<Dc.22 category="Deception" name="AddedKernel32">Document contains an add-obfuscated reference to kernel32.dll – a library that may be used by malicious payload.</Dc.22>
+		<Dc.23 category="Deception" name="AddedMscoree">Document contains an add-obfuscated reference to mscoree.dll – a library that may be used by malicious payload.</Dc.23>
+		<Dc.24 category="Deception" name="AddedMsvbvm">Document contains an add-obfuscated reference to msvbvm – a library that may be used by malicious payload compiled for VB6.</Dc.24>
+		<Dc.25 category="Deception" name="AutoitDownloadExecute">AutoIt script is capable of downloading and executing files.This is often done to deliver additional malicious payloads.</Dc.25>
+		<Dc.26 category="Deception" name="AutoitObfuscationStringConcat">AutoIt script is likely obfuscated with string concatenation. This is often done to avoid detection of(whole) suspicious commands.</Dc.26>
+		<Dc.27 category="Deception" name="AutoitShellcodeCalling">AutoIt script uses CallWindowProc winapi function that may be indicative of injecting shellcode.</Dc.27>
+		<Dc.28 category="Deception" name="AutoitUseResources">AutoIt script uses data from resources stored alongside with the script.Malware often stores important parts of itself as resource data and unpacks them in runtime –  therefore this looks suspicious.</Dc.28>
+		<Dc.29 category="Deception" name="ClearKernel32">Document contains reference to kernel32.dll –  a library that may be used by malicious payload.</Dc.29>
+		<Dc.30 category="Deception" name="ClearMscoree">Document contains reference to mscoree.dll –  a library that may be used by malicious payload.</Dc.30>
+		<Dc.31 category="Deception" name="ClearMsvbvm">Document contains reference to msvbvm –  a library that may be used by malicious payload compiled for VB6.</Dc.31>
+		<Dc.32 category="Deception" name="ComplexInvalidVersion">The document declares the wrong PDF version.</Dc.32>
+		<Dc.33 category="Deception" name="ComplexJsStenographySuspected">The document may contain JavaScript code hidden in literal strings.</Dc.33>
+		<Dc.34 category="Deception" name="EncodedDosStub1">Document contains an obfuscated PE DOS stub that may belong to a hidden malicious payload.</Dc.34>
+		<Dc.35 category="Deception" name="EncodedDosStub2">Document contains an obfuscated PE DOS stub that may belong to a hidden malicious payload.</Dc.35>
+		<Dc.36 category="Deception" name="HiddenMachO">Has another MachO executable file within, which is not properly declared. This may be an attempt to hide the payload from being easily detected.</Dc.36>
+		<Dc.37 category="Deception" name="JSTokensSuspicious">The document contains unusually suspicious JavaScript.</Dc.37>
+		<Dc.38 category="Deception" name="PDFParserDotDotSlash1URICount">The document may attempt path traversal using relative paths like "../".</Dc.38>
+		<Dc.39 category="Deception" name="PDFParserJSStreamCount">The document contains an unusually high number of JavaScript - related streams.</Dc.39>
+		<Dc.40 category="Deception" name="PDFParserJSTokenCounts0cumulativesum">The document contains an anomalously high number of JavaScript tokens.</Dc.40>
+		<Dc.41 category="Deception" name="PDFParserJavaScriptMagicseval~28">The document may contain obfuscated JavaScript or can run dynamically loaded JavaScript with eval().</Dc.41>
+		<Dc.42 category="Deception" name="PDFParserJavaScriptMagicsunescape~28">The document may contain obfuscated JavaScript.</Dc.42>
+		<Dc.43 category="Deception" name="PDFParserNamesAllNamesSuspicious">The document contains an anomalously high number of suspicious names</Dc.43>
+		<Dc.44 category="Deception" name="PDFParserNamesObfuscatedNamesSuspicious">The document contains an anomalously high number of obfuscated names.</Dc.44>
+		<Dc.45 category="Deception" name="PDFParserPEDetections">The document contains embedded PE file(s).</Dc.45>
+		<Dc.46 category="Deception" name="PDFParserSwfObjectsxObservationsxSWFObjectsversion">The document contains an SWF object with an unusual version number.</Dc.46>
+		<Dc.47 category="Deception" name="PDFParserSwfObjectsxObservationsxSWFObjectsxZLibcmf">The document contains an SWF object with unusual compression parameters.</Dc.47>
+		<Dc.48 category="Deception" name="PDFParserjsObjectsLength">The document contains an anomalously high number of individual JavaScript scripts.</Dc.48>
+		<Dc.49 category="Deception" name="PDFParserswfObjectsxObservationsxSWFObjectsxZLibflg">The document contains an SWF object with unusual compression flag parameters.</Dc.49>
+		<Dc.50 category="Deception" name="PE_ClearDosStub1">Document contains a DOS stub –  indicative of PE file inclusion.</Dc.50>
+		<Dc.51 category="Deception" name="PE_ClearDosStub2">Document contains a DOS stub –  indicative of PE file inclusion.</Dc.51>
+		<Dc.52 category="Deception" name="PE_ClearHeader">Document contains PE file header data that does not belong in the document structure.</Dc.52>
+		<Dc.53 category="Deception" name="PEinAppendedSpace">Document contains a PE file that does not belong in the document structure.</Dc.53>
+		<Dc.54 category="Deception" name="PEinFreeSpace">Document contains a PE file that does not belong in the document structure.</Dc.54>
+		<Dc.55 category="Deception" name="SegmentSuspiciousName">A segment has either an invalid string as a name, or an unusual non-standard name.This may indicate post-compilation tampering or use of packers or obfuscators.</Dc.55>
+		<Dc.56 category="Deception" name="SegmentSuspiciousSize">Segment size is significantly different from size of all content (sections)within.This may indicate usage of unreferenced area, or reservation of space for runtime unpacking of malicious code.</Dc.56>
+		<Dc.57 category="Deception" name="StringJsSplitting">The document contains suspicious JS tokens.</Dc.57>
+		<Dc.58 category="Deception" name="SWFinAppendedSpace">Document contains a Shockwave flash object that does not belong in the document structure.</Dc.58>
+		<Dc.59 category="Deception" name="XoredHeader">Document contains a xor-obfuscated PE header that may be a hidden malicious payload.</Dc.59>
+		<Dc.60 category="Deception" name="XoredKernel32">Document contains a xor-obfuscated reference to kernel32.dll –  a library that may be used by malicious payload.</Dc.60>
+		<Dc.61 category="Deception" name="XoredMscoree">Document contains a xor-obfuscated reference to mscoree.dll –  a library that may be used by malicious payload.</Dc.61>
+		<Dc.62 category="Deception" name="XoredMsvbvm">Document contains a xor-obfuscated reference to msvbvm –  a library that may be used by malicious payload compiled for VB6.</Dc.62>
+		<Ds.1 category="Destruction" name="AutorunsPersistence">This object attempts to interact with common methods of persistence (startup scripts, etc).  Malware commonly uses these tactics to attain persistence.</Ds.1>
+		<Ds.2 category="Destruction" name="FileDirDeleteImports">This PE imports functions that can be used to delete Files or Directories.  Malware uses this to break systems and cover its tracks.</Ds.2>
+		<Ds.3 category="Destruction" name="PossibleLocker">This object demonstrates evidence of a desire to lock out common tools by policy.  Malware will do this to retain persistence and make detection and cleanup more difficult.</Ds.3>
+		<Ds.4 category="Destruction" name="RegistryManipulation">This object imports functions that are used to manipulate the windows registry.   Malware does this to attain persistence, avoid detection, and for many other reasons.</Ds.4>
+		<Ds.5 category="Destruction" name="SeBackupPrivilege">This PE might attempt to read files to which it has not been granted access.  SeBackup privilege allows access to files without honoring access controls.  It is frequently used by programs that handle backups, and is frequently limited to administrative users, but can be used maliciously to get access to specific elements that might otherwise be difficult.</Ds.5>
+		<Ds.6 category="Destruction" name="SeDebugPrivilege">This PE might attempt to tamper with system processes. SeDebug Privilege is used to access processes other than your own and is frequently limited to administrative users.  It is often paired with reading and writing to other processes.</Ds.6>
+		<Ds.7 category="Destruction" name="SeRestorePrivilege">This PE might attempt to change or delete files to which it has not been granted access.  The pair to SeBackup, SeRestore privilege allows writing without consideration of access control.</Ds.7>
+		<Ds.8 category="Destruction" name="ServiceControlImports">This object imports functions that can control windows services on the current system.  Malware uses this to either launch itself into the background via installing as a service, or to disable other services that may have a protective function.</Ds.8>
+		<Ds.9 category="Destruction" name="SpawnProcessImports">This PE imports functions that can be used to spawn another process.  Malware uses this to launch subsequent phases of an infection, typically downloaded from the Internet.</Ds.9>
+		<Ds.10 category="Destruction" name="TerminateProcessImports">This object imports functions that can be used to stop a running process.  Malware uses this to attempt to remove protection systems, or to cause damage to a running system.</Ds.10>
+		<Ds.11 category="Destruction" name="UserManagementImports">This object imports functions that can be used to change users on the local system.  It can add, delete, or change key user details. Malware can use this capability to achieve persistence or cause harm to the local system.</Ds.11>
+		<Ds.12 category="Destruction" name="VirtualAllocImports">This object imports functions that are used to create memory in a running process. Malware does this to inject itself into a running process.</Ds.12>
+		<Ds.13 category="Destruction" name="action_writeByte">VBA script within the document is likely writing bytes to a file –  which is an unusual action for legitimate documents.</Ds.13>
+		<Ds.14 category="Destruction" name="action_hexToBin">VBA script within the document is likely using hexadecimal to binary conversion that may indicate decoding a hidden malicious payload.</Ds.14>
+		<Ds.15 category="Destruction" name="appended_URI">Document contains a link that does not belong in the document structure.</Ds.15>
+		<Ds.16 category="Destruction" name="appended_exploit">Document contains suspicious data outside of document structure that may be indicative of an exploit.</Ds.16>
+		<Ds.17 category="Destruction" name="appended_macro">Document contains a macro script that does not belong in the document structure.</Ds.17>
+		<Ds.18 category="Destruction" name="appended_90_nopsled">Document contains a nop-sled that does not belong in the document structure –  this is almost certainly there to facilitate exploitation.</Ds.18>
+		<Ds.19 category="Destruction" name="DestructionString">Has capabilities to kill processes or shutdown the machine via shell commands.</Ds.19>
+		<Ds.20 category="Destruction" name="JsHeapSpray">The document likely contains heap spray code.</Ds.20>
+		<Ds.21 category="Destruction" name="SkylinedHeapSpray">The document contains an unmodified version of skylined heap spray code.</Ds.21>
+		<Ds.22 category="Destruction" name="StringJsExploit">The document contains JavaScript code that is likely capable of exploitation.</Ds.22>
+		<Ds.23 category="Destruction" name="StringJsObfuscation">The document contains JavaScript obfuscation tokens.</Ds.23>
+		<Ds.24 category="Destruction" name="trigger_AutoExec">VBA script within the document is likely trying to execute automatically.</Ds.24>
+		<Ds.25 category="Destruction" name="trigger_AutoOpen">VBA script within the document is likely trying to execute as soon as the document is opened.</Ds.25>
+		<Ds.26 category="Destruction" name="trigger_Document_Open">VBA script within the document is likely trying to execute as soon as the document is opened.</Ds.26>
+		<Ds.27 category="Destruction" name="trigger_DocumentOpen">VBA script within the document is likely trying to execute as soon as the document is opened.</Ds.27>
+		<Ds.28 category="Destruction" name="trigger_AutoExit">VBA script within the document is likely trying to execute automatically when the document is closing.</Ds.28>
+		<Ds.29 category="Destruction" name="trigger_AutoClose">VBA script within the document is likely trying to execute automatically when the document is closing.</Ds.29>
+		<Ds.30 category="Destruction" name="trigger_Document_Close">VBA script within the document is likely trying to execute automatically when the document is closing.</Ds.30>
+		<Ds.31 category="Destruction" name="trigger_DocumentBeforeClose">VBA script within the document is likely trying to execute automatically just before the document closes.</Ds.31>
+		<Ds.32 category="Destruction" name="trigger_DocumentChange">VBA script within the document is likely trying to execute automatically when the document is being changed.</Ds.32>
+		<Ds.33 category="Destruction" name="trigger_AutoNew">VBA script within the document is likely trying to execute automatically when a new document is being created.</Ds.33>
+		<Ds.34 category="Destruction" name="trigger_Document_New">VBA script within the document is likely trying to execute automatically when a new document is being created.</Ds.34>
+		<Ds.35 category="Destruction" name="trigger_NewDocument">VBA script within the document is likely trying to execute automatically when a new document is being created.</Ds.35>
+		<Ds.36 category="Destruction" name="trigger_Auto_Open">VBA script within the document is likely trying to execute as soon as the document is opened.</Ds.36>
+		<Ds.37 category="Destruction" name="trigger_Workbook_Open">VBA script within the document is likely trying to execute as soon as an Excel workbook is opened.</Ds.37>
+		<Ds.38 category="Destruction" name="trigger_Auto_Close">VBA script within the document is likely trying to execute automatically when the document is closing.</Ds.38>
+		<Ds.39 category="Destruction" name="trigger_Workbook_Close">VBA script within the document is likely trying to execute automatically when an Excel workbook is closing.</Ds.39>
+		<Mc.1 category="Misc" name="CodepageLookupImports">This object imports functions used to look up the codepage (location) of a running system.  Malware uses this to differentiate which country/region a system is running in to better target particular groups.</Mc.1>
+		<Mc.2 category="Misc" name="MutexImports">This object imports functions to create and manipulate Mutex objects.  Malware frequently uses mutexes to avoid infecting a system multiple times.</Mc.2>
+		<Mc.3 category="Misc" name="OpenSSLStatic">This object contains a version of openSSL compiled to appear stealthy.  Malware will do this to include cryptography functionality without leaving strong evidence of it.</Mc.3>
+		<Mc.4 category="Misc" name="PrivEscalationCryptBase">This object shows evidence of attempting to use a particular privilege escalation using CryptBase.  Malware uses this to gain more privileges on the affected system.</Mc.4>
+		<Mc.5 category="Misc" name="AutoitFileOperations">AutoIt script is capable of performing multiple actions on files. This may be used for information gathering, persistence, or destruction.</Mc.5>
+		<Mc.6 category="Misc" name="AutorunString">Indicates capability to achieve persistence by using autorun mechanism(s).</Mc.6>
+		<Mc.7 category="Misc" name="PListString">Indicates capability to interact with property lists that are used by the OS. This may be used to achieve persistence or subvert various processes.</Mc.7>
+		<Mc.8 category="Misc" name="ShellCommandString">Indicates capability to use sensitive shell commands for reconnaissance, elevation of privilege, or data destruction.</Mc.8>
+		<Mc.9 category="Misc" name="SystemCallSuspicious">Indicates capability to monitor and/or control system and other processes, perform debug-like actions.</Mc.9>
+		<Sh.1 category="Shellcodes" name="ApiHashing">Document contains a byte sequence that looks like shellcode that tries to stealthily find library APIs loaded in memory.</Sh.1>
+		<Sh.2 category="Shellcodes" name="BlackholeV2">The document looks like it might have come from the Blackhole exploit kit.</Sh.2>
+		<Sh.3 category="Shellcodes" name="ComplexGotoEmbed">The document may be able to force a browser to go to an address or perform an action.</Sh.3>
+		<Sh.4 category="Shellcodes" name="ComplexSuspiciousHeaderLocation">PDF header located at non - zero offset which may indicate an attempt to prevent this document from being recognized as a PDF document.</Sh.4>
+		<Sh.5 category="Shellcodes" name="EmbeddedTiff">The document may contain a crafted tiff image with nopsled to facilitate exploitation.</Sh.5>
+		<Sh.6 category="Shellcodes" name="EmbeddedXDP">The document likely contains another PDF as an xml(XDP).</Sh.6>
+		<Sh.7 category="Shellcodes" name="FindKernel32Base1">Document contains a byte sequence that looks like a shellcode that tries to locate kernel32.dll in memory.</Sh.7>
+		<Sh.8 category="Shellcodes" name="FindKernel32Base2">Document contains a byte sequence that looks like a shellcode that tries to locate kernel32.dll in memory.</Sh.8>
+		<Sh.9 category="Shellcodes" name="FindKernel32Base3">Document contains a byte sequence that looks like a shellcode that tries to locate kernel32.dll in memory.</Sh.9>
+		<Sh.10 category="Shellcodes" name="FunctionPrologSig">Document contains a byte sequence that is a typical function prolog - likely contains shellcode.</Sh.10>
+		<Sh.11 category="Shellcodes" name="GetEIP1">Document contains a byte sequence that looks like a shellcode that resolves its own address to locate other things in memory and facilitate exploitation.</Sh.11>
+		<Sh.12 category="Shellcodes" name="GetEIP4">Document contains a byte sequence that looks like a shellcode that resolves its own address to locate other things in memory and facilitate exploitation. </Sh.12>
+		<Sh.13 category="Shellcodes" name="IndirectFnCall1">Document contains a byte sequence that looks like an indirect function call –  likely shellcode.</Sh.13>
+		<Sh.14 category="Shellcodes" name="IndirectFnCall2">Document contains a byte sequence that looks like an indirect function call –  likely shellcode.</Sh.14>
+		<Sh.15 category="Shellcodes" name="IndirectFnCall3">Document contains a byte sequence that looks like an indirect function call –  likely shellcode.</Sh.15>
+		<Sh.16 category="Shellcodes" name="SehSig">Document contains a byte sequence that is typical for Structured Exception Handling –  likely contains shellcode.</Sh.16>
+		<Sh.17 category="Shellcodes" name="StringLaunchActionBrowser">The document may be able to force a browser to go to an address or perform an action.</Sh.17>
+		<Sh.18 category="Shellcodes" name="StringLaunchActionShell">The document may be able to execute shell actions.</Sh.18>
+		<Sh.19 category="Shellcodes" name="StringSingExploit">The document might contain an exploit.</Sh.19>
+	</legend>
+</cylance>

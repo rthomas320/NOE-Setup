@@ -1,0 +1,13 @@
+select (select count(*) from FileAttributes) as TotalFiles,
+       (select count(*) from UnprocessedFiles) as RejectedFiles,
+       (Select count(*) from FileAttributes where FileType = 'pdf') as pdf_count,
+       (Select count(*) from FileAttributes where FileType = 'doc') as doc_count,
+       (Select count(*) from FileAttributes where FileType = 'docx') as docx_count,
+       (Select count(*) from FileAttributes where FileType = 'docm') as docm_count,
+       (Select count(*) from FileAttributes where FileType = 'xls') as xls_count,
+       (Select count(*) from FileAttributes where FileType = 'xlsx') as xlsx_count,
+       (Select count(*) from FileAttributes where FileType = 'xlsm') as xlsm_count,
+       (Select count(*) from FileAttributes where FileType = 'ppt') as ppt_count,
+       (Select count(*) from FileAttributes where FileType = 'pptx') as pptx_count,
+       (Select count(*) from FileAttributes where FileType = 'pptm') as pptm_count,
+       (Select count(*) from FileAttributes where FileType is null) as other_count;
