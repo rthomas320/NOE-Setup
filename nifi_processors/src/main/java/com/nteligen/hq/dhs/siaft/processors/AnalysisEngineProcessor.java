@@ -4,7 +4,6 @@ import com.nteligen.hq.dhs.siaft.exceptions.FileNotFoundException;
 import com.nteligen.hq.dhs.siaft.exceptions.SIAFTFatalProcessException;
 import com.nteligen.hq.dhs.siaft.exceptions.AnalysisException;
 import org.apache.commons.lang.StringUtils;
-import org.apache.nifi.annotation.behavior.ReadsAttribute;
 import org.apache.nifi.annotation.behavior.SideEffectFree;
 import org.apache.nifi.annotation.behavior.WritesAttribute;
 import org.apache.nifi.annotation.behavior.WritesAttributes;

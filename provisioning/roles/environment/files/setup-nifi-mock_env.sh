@@ -12,4 +12,3 @@ mkdir -p /home/nifi/data/mockSanitizer2/out
 mkdir -p /home/nifi/data/mockSanitizer3/in
 mkdir -p /home/nifi/data/mockSanitizer3/out
 chown -R nifi.nifi /home/nifi/data/*
-

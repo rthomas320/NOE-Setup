@@ -53,4 +53,3 @@ Date_Created DATETIME NOT NULL,
 Date_Updated DATETIME,
 FOREIGN KEY(FK_FileAttributes_ID) REFERENCES FileAttributes(PK_FileAttributes_ID)
 );
-
