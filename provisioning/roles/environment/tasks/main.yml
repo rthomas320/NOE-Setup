@@ -78,7 +78,7 @@
   become: yes
 
 - name: Source Java Paths
-  shell: "source /etc/profile.d/java=home.sh"
+  shell: "source /etc/profile.d/java-home.sh"
   become: yes
 
 - name: Install Maven
