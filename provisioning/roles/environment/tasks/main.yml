@@ -56,16 +56,12 @@
       - java-17-openjdk-devel
   become: yes
 
-- name: Select Java 17
-  alternatives:
-    name: java
-    path: /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el8.x86_64/bin/java
+- name: Set Java Version
+  shell: sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el9.x86_64/bin/java
   become: yes
 
-- name: Select Javac 17
-  alternatives:
-    name: javac
-    path: /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el8.x86_64/bin/javac
+- name: Set Java Compiler Version
+  shell: sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el9.x86_64/bin/javac
   become: yes
 
 - name: Copy Java-home.sh 
