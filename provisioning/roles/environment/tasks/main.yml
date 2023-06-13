@@ -56,9 +56,21 @@
       - java-17-openjdk-devel
   become: yes
 
-- name: Copy Java8.sh 
+- name: Select Java 17
+  alternatives:
+    name: java
+    path: /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el8.x86_64/bin/java
+  become: yes
+
+- name: Select Javac 17
+  alternatives:
+    name: javac
+    path: /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el8.x86_64/bin/javac
+  become: yes
+
+- name: Copy Java-home.sh 
   copy:
-    src: ../files/java8.sh
+    src: ../files/java-home.sh
     dest: /etc/profile.d
     mode: 0644
     owner: root
@@ -66,7 +78,7 @@
   become: yes
 
 - name: Source Java Paths
-  shell: "source /etc/profile.d/java8.sh"
+  shell: "source /etc/profile.d/java=home.sh"
   become: yes
 
 - name: Install Maven
