@@ -1,0 +1,235 @@
+---
+- name: DNF Update
+  dnf:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: DNF Update Cache
+  dnf:
+    update_cache: yes
+    state: latest
+
+- name: YUM Update
+  yum:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: Install development tools
+  dnf:
+    name:
+      - libsecret-devel
+      - cmake
+      - make
+      - gcc-c++
+      - epel-release
+      - ruby
+      - hexedit
+      - xorg-x11-xauth
+      - mod_ssl
+      - httpd
+      - wget
+      - zip
+      - unzip
+    state: present
+  become: yes
+
+- name: Install Python & Pip
+  dnf:
+    name:
+      - python3
+      - python3-pip
+    state: latest
+  become: yes
+
+- name: Install MESA Drivers
+  dnf:
+    name:
+      - mesa-dri-drivers
+  become: yes
+
+- name: Install Java 17
+  dnf:
+    name:
+      - java-17-openjdk
+      - java-17-openjdk-devel
+  become: yes
+
+- name: Set Java Version
+  shell: sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el9.x86_64/bin/java
+  become: yes
+
+- name: Set Java Compiler Version
+  shell: sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el9.x86_64/bin/javac
+  become: yes
+
+- name: Copy Java-home.sh 
+  copy:
+    src: ../files/java-home.sh
+    dest: /etc/profile.d
+    mode: 0644
+    owner: root
+    group: root
+  become: yes
+
+- name: Source Java Paths
+  shell: "source /etc/profile.d/java-home.sh"
+  become: yes
+
+- name: Install Maven
+  dnf:
+    name:
+      - maven
+    state: latest
+  become: yes
+
+- name: Add nifi group
+  become: yes
+  group:
+    name: nifi
+    state: present
+
+- name: Add nifi user
+  become: yes
+  user:
+    name: nifi
+    group: nifi
+    createhome: yes
+
+- name: Create folder for latest version of NiFi
+  file:
+    path: /opt/nifi
+    state: directory
+    owner: nifi
+    group: nifi
+    mode: 0755
+  become: yes
+
+- name: Download Version 1.21.0 of NiFi
+  get_url:
+    url: https://archive.apache.org/dist/nifi/1.21.0/nifi-1.21.0-bin.zip
+    dest: /home/vagrant/nifi-1.21.0-bin.zip
+    mode: 0755
+
+- name: Unzip NiFi
+  shell: sudo unzip /home/vagrant/nifi-1.21.0-bin.zip -d /opt/nifi
+
+- name: Download NiFi Tools
+  get_url:
+    url: https://archive.apache.org/dist/nifi/1.21.0/nifi-toolkit-1.21.0-bin.zip
+    dest: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+    mode: 0755
+
+- name: Unzip NiFi Tools
+  shell: sudo unzip /home/vagrant/nifi-toolkit-1.21.0-bin.zip -d /opt/nifi
+
+- name: Create Folder for NiFi
+  file:
+    path: /opt/nifi/
+    state: directory
+    owner: nifi
+    group: nifi
+    mode: 0755
+    recurse: yes
+  become: yes
+
+- name: Create symlink from installed version of NiFi
+  file:
+    src: /opt/nifi/nifi-1.21.0/
+    path: /opt/nifi-latest
+    state: link
+    owner: nifi
+    group: nifi
+  become: yes
+
+- name: Copy NiFi service to Vagrant machine
+  copy:
+    src: ../files/nifi.service
+    dest: /etc/systemd/system/
+    mode: 0755
+    owner: root
+  become: yes
+
+- name: Stop NiFi if running
+  systemd:
+    name: nifi
+    state: stopped
+  become: yes
+
+- name: Create NiFi data directory
+  file:
+    path: "{{ item  }}"
+    state: directory
+    mode: 0755
+    owner: nifi
+    group: nifi
+  with_items:
+    - /home/nifi/data/in
+    - /home/nifi/data/out
+    - /home/nifi/data/reports
+  become: yes
+
+- name: Enable NiFi Service and Start NiFi
+  systemd:
+    daemon-reload: yes
+    name: nifi
+    state: started
+    enabled: yes
+  become: yes
+  
+
+- name: Copy MariaDB Client jar file to NiFi directory 
+  copy:
+    src: ../files/mariadb-java-client-3.0.8.jar
+    dest: /opt/nifi/nifi-1.21.0/lib/
+    mode: 0755
+    owner: nifi
+    group: nifi
+  become: yes
+
+- name: Install MESA graphics libraries
+  dnf:
+    name:
+      - mesa-libGL
+      - mesa-libEGL
+      - xorg-x11-server-common
+    state: latest
+  become: yes
+
+- name: Install Firefox
+  yum:
+    name: firefox
+    state: latest
+  become: yes
+
+- name: Set Timezone
+  timezone:
+    name: America/New_York
+  become: yes
+
+- name: Install Git
+  dnf:
+    name: git
+    state: latest
+  become: yes
+
+- name: Copy moretools Install Script
+  copy:
+    src: ../files/moretools.sh
+    dest: /home/vagrant
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+  become: yes
+
+- name: Run moretools install script
+  shell: /home/vagrant/moretools.sh
+  become: yes
+
+- name: Set DISPLAY value for x-server
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    insertafter: EOF
+    line: 'export DISPLAY="10.0.2.2:0.0"'
+    state: present

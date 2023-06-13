@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS UnprocessedFiles;
+DROP TABLE IF EXISTS Sanitize;
+DROP TABLE IF EXISTS Analysis;
+DROP TABLE IF EXISTS AnalyzeEngines;
+DROP TABLE IF EXISTS SanitizeEngines;
+DROP TABLE IF EXISTS FileAttributes;

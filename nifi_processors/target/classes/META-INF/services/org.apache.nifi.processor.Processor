@@ -1,0 +1,6 @@
+com.nteligen.hq.dhs.siaft.processors.WorkflowSelector
+com.nteligen.hq.dhs.siaft.processors.DynamicRouter
+com.nteligen.hq.dhs.siaft.processors.DelayProcessor
+com.nteligen.hq.dhs.siaft.processors.SanitizeEngineProcessor
+com.nteligen.hq.dhs.siaft.processors.AnalysisEngineProcessor
+com.nteligen.hq.dhs.siaft.processors.ReportRouter

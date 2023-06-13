@@ -1,0 +1,48 @@
+---
+- name: Install MariaDB
+  dnf:
+    name:
+      - mariadb-server
+    update_cache: yes
+    disable_gpg_check: yes
+  become: yes
+
+- name: Enable Servics and Start MariaDB
+  systemd:
+    daemon-reload: yes
+    name: mariadb
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Install mysql-python-connector
+  pip:
+    name: pymysql
+    state: present
+  become: yes
+
+- name: Copy database provisioning, reprovisioning, and stored procedure scripts to local machine
+  copy:
+    src: "{{ item }}"
+    dest: /opt/nifi/db_scripts/
+    mode: 755
+  with_items:
+    - prov/secure_mysql.sh
+    - prov/secure_mysql.sql
+    - prov/create_db.sh
+    - prov/create_db.sql
+    - prov/delete_tables.sql
+    - prov/delete_data.sql
+    - prov/create_tables.sql
+    - prov/add_auto_increment_to_tables.sql
+    - prov/load_data.sql
+  become: yes
+
+- name: Execute Secure MySQL Script
+  shell: "/opt/nifi/db_scripts/secure_mysql.sh"
+  become: yes
+
+- name: Execute Create Database Script
+  shell: "/opt/nifi/db_scripts/create_db.sh"
+  become: yes
+
