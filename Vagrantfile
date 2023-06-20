@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "roboxes/rocky8"
   #config.disksize.size = "30GB"
-  config.vm.hostname = "faf-rocky8"
+  config.vm.hostname = "faf-noe-rocky8"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
-    vb.name = "faf-rocky8"
+    vb.name = "faf-noe-rocky8"
   #   # Customize the amount of memory on the VM:
     vb.memory = "4096"
     vb.cpus = "2"
