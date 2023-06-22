@@ -151,6 +151,23 @@
     owner: root
   become: yes
 
+- name: Create vagrant Downloads directory
+  file:
+    path: "/home/vagrant/Downloads"
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+  become: yes
+  
+- name: Copy NiFi Template to Vagrant Downloads
+  copy:
+    src: ../files/Nifi-NOE-Final-Template.xml
+    dest: /home/vagrant/Downloads
+    mode: 0666
+    owner: vagrant
+  become: yes
+
 - name: Stop NiFi if running
   systemd:
     name: nifi
@@ -167,6 +184,7 @@
   with_items:
     - /home/nifi/data/in
     - /home/nifi/data/out
+    - /home/nifi/data/error
     - /home/nifi/data/reports
   become: yes
 
