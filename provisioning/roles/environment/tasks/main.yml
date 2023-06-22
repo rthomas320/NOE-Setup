@@ -38,9 +38,9 @@
 - name: Install Python & Pip
   dnf:
     name:
-      - python39
-      - python39-pip
-    state: present
+      - python3
+      - python3-pip
+    state: latest
   become: yes
 
 - name: Install MESA Drivers
@@ -49,7 +49,7 @@
       - mesa-dri-drivers
   become: yes
 
-- name: Install Java
+- name: Install Java 17
   dnf:
     name:
       - java-17-openjdk
@@ -81,6 +81,7 @@
   dnf:
     name:
       - maven
+    state: latest
   become: yes
 
 - name: Add nifi group
@@ -102,34 +103,26 @@
     state: directory
     owner: nifi
     group: nifi
-    mode: 0644
+    mode: 0755
   become: yes
 
 - name: Download Version 1.21.0 of NiFi
   get_url:
     url: https://archive.apache.org/dist/nifi/1.21.0/nifi-1.21.0-bin.zip
-    dest: /vagrant/nifi-1.21.0-bin.zip
+    dest: /home/vagrant/nifi-1.21.0-bin.zip
     mode: 0755
 
 - name: Unzip NiFi
-  unarchive:
-    src: /vagrant/nifi-1.21.0-bin.zip
-    dest: /opt/nifi
-    copy: no
-  become: yes
+  shell: sudo unzip /home/vagrant/nifi-1.21.0-bin.zip -d /opt/nifi
 
 - name: Download NiFi Tools
   get_url:
     url: https://archive.apache.org/dist/nifi/1.21.0/nifi-toolkit-1.21.0-bin.zip
-    dest: /vagrant/nifi-toolkit-1.21.0-bin.zip
+    dest: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
     mode: 0755
 
 - name: Unzip NiFi Tools
-  unarchive:
-    src: /vagrant/nifi-toolkit-1.21.0-bin.zip
-    dest: /opt/nifi/
-    copy: no
-  become: yes
+  shell: sudo unzip /home/vagrant/nifi-toolkit-1.21.0-bin.zip -d /opt/nifi
 
 - name: Create Folder for NiFi
   file:
@@ -154,8 +147,25 @@
   copy:
     src: ../files/nifi.service
     dest: /etc/systemd/system/
-    mode: 0644
+    mode: 0755
     owner: root
+  become: yes
+
+- name: Create vagrant Downloads directory
+  file:
+    path: "/home/vagrant/Downloads"
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+  become: yes
+  
+- name: Copy NiFi Template to Vagrant Downloads
+  copy:
+    src: ../files/Nifi-NOE-Final-Template.xml
+    dest: /home/vagrant/Downloads
+    mode: 0666
+    owner: vagrant
   become: yes
 
 - name: Stop NiFi if running
@@ -174,6 +184,7 @@
   with_items:
     - /home/nifi/data/in
     - /home/nifi/data/out
+    - /home/nifi/data/error
     - /home/nifi/data/reports
   become: yes
 

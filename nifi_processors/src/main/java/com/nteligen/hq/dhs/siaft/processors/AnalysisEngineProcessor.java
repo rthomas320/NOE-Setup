@@ -33,9 +33,6 @@ import java.util.Set;
         + "password drop off path, and pickup path are configurable.")
 @WritesAttributes(
         {
-/*                @ReadsAttribute(attribute = "sanitize_engine_name",
-                        description = "The name of the sanitize Engine that the file was "
-                             + "processed by. This value can be empty."),*/
                 @WritesAttribute(attribute = AnalysisEngineProcessor.ANALYSIS_SUCCESS,
                         description = "This indicates that the analysis process was "
                                 + "successful or not."),
@@ -52,8 +49,8 @@ public class AnalysisEngineProcessor extends SIAFTBaseRetryProcessor
     public static final String SANITIZE_ENGINE = "sanitize_engine";
     public static final SuccessBehavior SUCCESS_BEHAVIOR = new SuccessBehavior();
     public static final AnalysisEngineBehavior ANALYSIS_BEHAVIOR = new AnalysisEngineBehavior();
-    //public static final UpdateDatabaseBehavior UPDATE_DATABASE_BEHAVIOR =
-            //new UpdateDatabaseBehavior();
+    public static final UpdateDatabaseBehavior UPDATE_DATABASE_BEHAVIOR =
+            new UpdateDatabaseBehavior();
 
     private ComponentLog log;
 
@@ -63,7 +60,7 @@ public class AnalysisEngineProcessor extends SIAFTBaseRetryProcessor
     {
         Set<SIAFTBehaviorRetrievable> behaviors = super.getBehaviors();
         behaviors.add(SUCCESS_BEHAVIOR);
-        //behaviors.add(UPDATE_DATABASE_BEHAVIOR);
+        behaviors.add(UPDATE_DATABASE_BEHAVIOR);
         behaviors.add(ANALYSIS_BEHAVIOR);
         return behaviors;
     }
@@ -196,6 +193,7 @@ public class AnalysisEngineProcessor extends SIAFTBaseRetryProcessor
         final String uniqueFileName = flowFile.getAttribute(CoreAttributes.UUID.key()) + extension;
         final String reportFileName = flowFile.getAttribute(CoreAttributes.UUID.key()) + ".json";
         AnalysisStatus status = AnalysisStatus.NOT_PROCESSED;
+        FlowFile updateDb = session.clone(flowFile);
 
         try
         {
@@ -205,7 +203,7 @@ public class AnalysisEngineProcessor extends SIAFTBaseRetryProcessor
             analyzeFile(session, flowFile, hostServer, analyzeService,
                     uniqueFileName, siaftSftp);
 
-            status = retrieveFile(session, flowFile,
+            status = retrieveFile(session, updateDb,
                     Paths.get(outputPath, reportFileName).toString(),
                     siaftSftp);
         }
@@ -216,6 +214,7 @@ public class AnalysisEngineProcessor extends SIAFTBaseRetryProcessor
                     ANALYSIS_SUCCESS,
                     AnalysisStatus.ANALYSIS_FAILURE.toString());
             session.putAttribute(flowFile, "analysis_engine_name", engineName);
+            session.putAttribute(updateDb, "analysis_engine_name", engineName);
         }
         catch (SIAFTFatalProcessException ex)
         {
@@ -229,12 +228,12 @@ public class AnalysisEngineProcessor extends SIAFTBaseRetryProcessor
             closeSftpSession(siaftSftp);
         }
         session.putAttribute(flowFile, "sftp_get_path", hostServer + outputPath);
-        session.putAttribute(flowFile, ANALYSIS_SUCCESS,
-                status.toString());
+        session.putAttribute(updateDb, "sftp_get_path", hostServer + outputPath);
+        session.putAttribute(flowFile, ANALYSIS_SUCCESS,  status.toString());
+        session.putAttribute(updateDb, ANALYSIS_SUCCESS,  status.toString());
 
-        // send the flow file to the Sanitize database processor
-        //FlowFile updateDb = session.clone(flowFile, 0, 0);
-        //session.transfer(flowFile, UPDATE_DATABASE_BEHAVIOR.updateDatabaseRelationship);
+         //send the flow file to the Analysis database processor
+        session.transfer(updateDb, UPDATE_DATABASE_BEHAVIOR.updateDatabaseRelationship);
         session.transfer(flowFile, SUCCESS_BEHAVIOR.successRelationship);
         session.getProvenanceReporter().fetch(flowFile, hostServer + outputPath);
     }
