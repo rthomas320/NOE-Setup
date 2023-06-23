@@ -188,14 +188,15 @@
     - /home/nifi/data/reports
   become: yes
 
-- name: Enable NiFi Service and Start NiFi
-  systemd:
-    daemon-reload: yes
-    name: nifi
-    state: started
-    enabled: yes
+- name: Copy siaft-processors nar file to NiFi directory 
+  copy:
+    src: ../files/siaft-processors.nar
+    dest: /opt/nifi/nifi-1.21.0/lib/
+    mode: 0755
+    owner: nifi
+    group: nifi
   become: yes
-  
+
 - name: Copy MariaDB Client jar file to NiFi directory 
   copy:
     src: ../files/mariadb-java-client-3.0.8.jar
@@ -205,6 +206,14 @@
     group: nifi
   become: yes
 
+- name: Enable NiFi Service and Start NiFi
+  systemd:
+    daemon-reload: yes
+    name: nifi
+    state: started
+    enabled: yes
+  become: yes
+  
 - name: Install MESA graphics libraries
   dnf:
     name:
