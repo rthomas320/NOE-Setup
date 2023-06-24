@@ -1,24 +1,33 @@
 Manual NOE VM Steps to run and verify NiFi flow
-- cd /vagrant/nifi_processors
+
+---
+
+To build custom NiFi processors and install the newly built nar file
+
+- cd /home/vagrant/source/nifi_processors
 - run: mvn clean install -Dmaven.test.skip=true
-- sudo cp /vagrant/nifi_processors/target/siaft-processors.nar /opt/nifi-latest/lib/
+- sudo cp /home/vagrant/source/nifi_processors/target/siaft-processors.nar /opt/nifi-latest/lib/
 - sudo chown nifi.nifi /opt/nifi-latest/lib/siaft-processors.nar
-- cd /vagrant/provisioning/roles/environment/files
-- sudo ./setup-nifi-mock-env.sh
-- sudo passwd root
-- su root
-- cp /home/nifi/data/hold/* /home/nifi/data/in/
+- sudo systemctl restart nifi
+
+---
+
+To test the NiFi flow with the new or existing coustom NiFi processors nar file
+
 - vim /etc/ssh/sshd_config
 - change PasswordAuthentication no to PasswordAuthentication yes
 - systemctl restart sshd
-- systemctl restart nifi
-- grep Generated /opt/nifi-latest/logs/* [to get nifi user and password]
-- exit [root]
+- sudo passwd root
+- su root
+- cd /home/nifi
+- ./setup-nifi-mock-env.sh
+- cp /home/nifi/data/hold/\* /home/nifi/data/in/
 - open a new terminal window
 - log in as vagrant
 - start firefox
 - open browser window to https://localhost:8443/nifi
-- login into NiFi with the generated credentials
+- cat /home/vagrant/nifi-creds.txt
+- login into NiFi with the credentials from cat results
 - save credentials in the popup screen
 - in the Operate Nifi Flow click the last icon to upload the template file
 - click select template
@@ -29,20 +38,23 @@ Manual NOE VM Steps to run and verify NiFi flow
 - click add to add the template that was uploaded
 - click a blank spot in the grid to un-highlight the processors and the relationships
 - right click a blank spot in the grid and choose enable all controller services in the popup menu
-- go back to the terminal window
-- cd /vagrant/provisioning/roles/environment/files
-- sudo ./start-nifi-mock-processors.sh
+- go back to the terminal window with root user in directory /home/nifi
+- ./start-nifi-mock-processors.sh
 - return to nifi flow in the firefox browser
 - right click a blank area of the grid and select start from the popup menu
 - right click a blank area of the grid and select refresh
-- repeat refreshes until the three sample files are processed [Write Analyzer Results to The Database show 3 in and 3 out]
+- repeat refreshes until the three sample files are processed
+  [Write Analyzer Results to The Database show 3 in and 3 out]
 - right click a blank area of the grid select stop
-- go to the terminal window
+- go to the terminal window with root user in directory /home/nifi
 - sudo ./stop-nifi-mock-processors.sh
-- mysql -u vagrant -pvagrant siaft [to get to database commandline prompt]
-- select * from FileAttributes;
-- select * from Sanitize;
-- select * from Analysis;
-- quit [to exit DB commandline prompt
-- sudo cat /home/nifi/data/out/some.txt to see s1, s2, s3 at the bottom of the file indicating the file went through sanitizer1, sanitizer2, and sanitizer3
-
+- exit [root]
+- mysql -u vagrant -pvagrant siaft [to enter database commandline prompt]
+- select \* from FileAttributes;
+- select \* from Sanitize;
+- select \* from Analysis;
+- quit [to exit DB commandline prompt]
+- sudo cat /home/nifi/data/out/some.txt to see s1, s2, s3 at the bottom of the file
+  [indicating the file went through sanitizer1, sanitizer2, and sanitizer3]
+- sudo cat /home/nifi/data/out/somemore.txt see s1, s2, s3 at the bottom of the file
+- sudo cat /home/nifi/data/out/evenmore.txt see s1, s2, s3 at the bottom of the file

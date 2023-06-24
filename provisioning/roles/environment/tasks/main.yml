@@ -114,6 +114,8 @@
 
 - name: Unzip NiFi
   shell: sudo unzip /home/vagrant/nifi-1.21.0-bin.zip -d /opt/nifi
+  args:
+    creates: /opt/nifi/nifi-1.21.0
 
 - name: Download NiFi Tools
   get_url:
@@ -123,6 +125,8 @@
 
 - name: Unzip NiFi Tools
   shell: sudo unzip /home/vagrant/nifi-toolkit-1.21.0-bin.zip -d /opt/nifi
+  args:
+    creates: /opt/nifi/nifi-toolkit-1.21.0
 
 - name: Create Folder for NiFi
   file:
@@ -210,9 +214,9 @@
     group: nifi
     mode: 0755
   with_items:
-    - ../files/analylzer1.sh
-    - ../files/analylzer2.sh
-    - ../files/analylzer2.sh
+    - ../files/analyzer1.sh
+    - ../files/analyzer2.sh
+    - ../files/analyzer2.sh
     - ../files/sanitizer1.sh
     - ../files/sanitizer2.sh
     - ../files/sanitizer3.sh
@@ -232,7 +236,7 @@
 
 - name: Download Version 3.1.4 of mariadb client
   get_url:
-    url: https://dlm.mariadb.com/2912798/COnnedtors/java/connector-java-3.1.4/mariadb-java-client-3.1.4.jar
+    url: https://dlm.mariadb.com/2912798/Connectors/java/connector-java-3.1.4/mariadb-java-client-3.1.4.jar
     dest: /opt/nifi/nifi-1.21.0/lib/mariadb-java-client-3.1.4.jar
     owner: nifi
     group: nifi
@@ -292,3 +296,16 @@
     insertafter: EOF
     line: 'export DISPLAY="10.0.2.2:0.0"'
     state: present
+
+- name: Source .bashrc file
+  shell: source /home/vagrant/.bashrc
+
+- name: Remove NiFi zip file
+  file:
+    path: /home/vagrant/nifi-1.21.0-bin.zip
+    state: absent
+
+- name: Remove NiFi Toolkit zip file
+  file:
+    path: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+    state: absent
