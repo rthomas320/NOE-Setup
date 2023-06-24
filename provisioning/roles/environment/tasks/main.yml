@@ -191,12 +191,12 @@
 
 - name: Copy initial test files to Nifi hold diretory
   copy:
-    src: {{ item }}
+    src: "{{ item }}"
     dest: /home/nifi/data/hold
     owner: nifi
     group: nifi
     mode: 0755
-   with_items:
+  with_items:
     - ../files/some.txt
     - ../files/somemore.txt
     - ../files/evenmore.txt
@@ -204,12 +204,12 @@
 
 - name: Copy mock script files to Nifi home
   copy:
-    src: {{ item }}
+    src: "{{ item }}"
     dest: /home/nifi/
     owner: nifi
     group: nifi
     mode: 0755
-   with_items:
+  with_items:
     - ../files/analylzer1.sh
     - ../files/analylzer2.sh
     - ../files/analylzer2.sh
