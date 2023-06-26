@@ -15,12 +15,6 @@
     enabled: yes
   become: yes
 
-- name: Install mysql-python-connector
-  pip:
-    name: pymysql
-    state: present
-  become: yes
-
 - name: Copy database provisioning, reprovisioning, and stored procedure scripts to local machine
   copy:
     src: "{{ item }}"
