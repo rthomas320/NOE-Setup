@@ -9,7 +9,7 @@ To use the Ansible provisioning without using Vagrant or the Vagrantfile
 - follow the instructions below
 Note: The custom nifi processors use sftp to pass and retrieve files. The processor is configured
  to sftp to the localhost with 'root' as the user and 'vagrant' as the password.  The configuration
- for the Sanitzer1, Sanitizer2, Santizer3, and Analyzer1 processors may be changed to use
+ for the Saniitzer1, Sanitizer2, Sanitizer3, and Analyzer1 processors may be changed to use
  a different user/password
 ---
 
