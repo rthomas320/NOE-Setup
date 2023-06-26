@@ -7,6 +7,7 @@ To use the Ansible provisioning without using Vagrant or the Vagrantfile
 - cd /home/vagrant
 - edit /home/vagrant/provisioning/setup_machine.yml change - hosts: all to - hosts: localhost
 - anisble-playbook provisioning/setup_machine.yml
+- source /home/vagrant/.bashrc [to set DISPLAY variable of VM to local machine for firefox to display]
 - follow the instructions below
 Note: The custom nifi_processors source files will be in /home/vagrant/nifi_processors instead
  of /home/vagrant/source/nifi_processors as in the OVA.

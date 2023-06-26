@@ -309,3 +309,14 @@
   file:
     path: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
     state: absent
+
+- name: Re-create empty NiFi file so not re-downloaded on provision failure
+  command: touch /home/vagrant/nifi-1.21.0-bin.zip
+  args:
+    creates: /home/vagrant/nifi-1.21.0-bin.zip
+
+- name: Re-create empty NiFi tool file so not re-downloaded on provision failure
+  command: touch /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+  args:
+    creates: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+
