@@ -1,8 +1,8 @@
 #!/bin/bash
-/home/nifi/data/analyzer1.sh &
-#/home/nifi/data/analyzer2.sh &
-#/home/nifi/data/analyzer3.sh &
-/home/nifi/data/sanitizer1.sh &
-/home/nifi/data/sanitizer2.sh &
-/home/nifi/data/sanitizer3.sh &
+/home/nifi/analyzer1.sh &
+#/home/nifi/analyzer2.sh &
+#/home/nifi/analyzer3.sh &
+/home/nifi/sanitizer1.sh &
+/home/nifi/sanitizer2.sh &
+/home/nifi/sanitizer3.sh &
 

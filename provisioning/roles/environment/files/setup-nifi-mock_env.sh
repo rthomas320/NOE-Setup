@@ -1,8 +1,4 @@
 #!/bin/bash
-cp sanitizer*.sh /home/nifi/data/
-cp analyzer*.sh /home/nifi/data/
-mkdir /home/nifi/data/hold
-cp *.txt /home/nifi/data/hold/
 mkdir -p /home/nifi/data/mockAnalyzer1/in
 mkdir -p /home/nifi/data/mockAnalyzer1/out
 mkdir -p /home/nifi/data/mockAnalyzer2/in

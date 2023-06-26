@@ -114,6 +114,8 @@
 
 - name: Unzip NiFi
   shell: sudo unzip /home/vagrant/nifi-1.21.0-bin.zip -d /opt/nifi
+  args:
+    creates: /opt/nifi/nifi-1.21.0
 
 - name: Download NiFi Tools
   get_url:
@@ -123,6 +125,8 @@
 
 - name: Unzip NiFi Tools
   shell: sudo unzip /home/vagrant/nifi-toolkit-1.21.0-bin.zip -d /opt/nifi
+  args:
+    creates: /opt/nifi/nifi-toolkit-1.21.0
 
 - name: Create Folder for NiFi
   file:
@@ -184,8 +188,59 @@
   with_items:
     - /home/nifi/data/in
     - /home/nifi/data/out
+    - /home/nifi/data/hold
     - /home/nifi/data/error
     - /home/nifi/data/reports
+  become: yes
+
+- name: Copy initial test files to Nifi hold diretory
+  copy:
+    src: "{{ item }}"
+    dest: /home/nifi/data/hold
+    owner: nifi
+    group: nifi
+    mode: 0755
+  with_items:
+    - ../files/some.txt
+    - ../files/somemore.txt
+    - ../files/evenmore.txt
+  become: yes
+
+- name: Copy mock script files to Nifi home
+  copy:
+    src: "{{ item }}"
+    dest: /home/nifi/
+    owner: nifi
+    group: nifi
+    mode: 0755
+  with_items:
+    - ../files/analyzer1.sh
+    - ../files/analyzer2.sh
+    - ../files/analyzer2.sh
+    - ../files/sanitizer1.sh
+    - ../files/sanitizer2.sh
+    - ../files/sanitizer3.sh
+    - ../files/setup-nifi-mock_env.sh
+    - ../files/start-nifi-mock-processors.sh
+    - ../files/stop-nifi-mock-processors.sh
+  become: yes
+
+- name: Copy siaft-processors nar file to NiFi directory 
+  copy:
+    src: ../files/siaft-processors.nar
+    dest: /opt/nifi/nifi-1.21.0/lib/
+    mode: 0755
+    owner: nifi
+    group: nifi
+  become: yes
+
+- name: Download Version 3.1.4 of mariadb client
+  get_url:
+    url: https://dlm.mariadb.com/2912798/Connectors/java/connector-java-3.1.4/mariadb-java-client-3.1.4.jar
+    dest: /opt/nifi/nifi-1.21.0/lib/mariadb-java-client-3.1.4.jar
+    owner: nifi
+    group: nifi
+    mode: 0755
   become: yes
 
 - name: Enable NiFi Service and Start NiFi
@@ -196,16 +251,6 @@
     enabled: yes
   become: yes
   
-
-- name: Copy MariaDB Client jar file to NiFi directory 
-  copy:
-    src: ../files/mariadb-java-client-3.0.8.jar
-    dest: /opt/nifi/nifi-1.21.0/lib/
-    mode: 0755
-    owner: nifi
-    group: nifi
-  become: yes
-
 - name: Install MESA graphics libraries
   dnf:
     name:
@@ -251,3 +296,16 @@
     insertafter: EOF
     line: 'export DISPLAY="10.0.2.2:0.0"'
     state: present
+
+- name: Source .bashrc file
+  shell: source /home/vagrant/.bashrc
+
+- name: Remove NiFi zip file
+  file:
+    path: /home/vagrant/nifi-1.21.0-bin.zip
+    state: absent
+
+- name: Remove NiFi Toolkit zip file
+  file:
+    path: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+    state: absent
