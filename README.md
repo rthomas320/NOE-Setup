@@ -5,11 +5,14 @@ To use the Ansible provisioning without using Vagrant or the Vagrantfile
 - login as vagrant
 - git clone the repo https://github.com/rthomas320/FAF-Project to /home/vagrant
 - cd /home/vagrant
+- edit /home/vagrant/provisioning/setup_machine.yml change - hosts: all to - hosts: localhost
 - anisble-playbook provisioning/setup_machine.yml
 - follow the instructions below
-Note: The custom nifi processors use sftp to pass and retrieve files. The processor is configured
- to sftp to the localhost with 'root' as the user and 'vagrant' as the password.  The configuration
- for the Sanitizer1, Sanitizer2, Sanitizer3, and Analyzer1 processors may be changed to use
+Note: The custom nifi_processors source files will be in /home/vagrant/nifi_processors instead
+ of /home/vagrant/source/nifi_processors as in the OVA.
+ The custom nifi processors use sftp to pass and retrieve files. The processor is configured to
+ sftp to the localhost with 'root' as the user and 'vagrant' as the password.  The configuration
+ for the Saniitzer1, Sanitizer2, Sanitizer3, and Analyzer1 processors may be changed to use
  a different user/password
 ---
 
