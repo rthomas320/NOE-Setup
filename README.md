@@ -1,4 +1,4 @@
-To use the Ansible provisioning without using Vagrant or the Vagrantfile
+## To use the Ansible provisioning without using Vagrant or the Vagrantfile
 
 - create a vagrant user with sudo priveleges
 - install ansible
@@ -17,7 +17,7 @@ Note: The custom nifi_processors source files will be in /home/vagrant/nifi_proc
  a different user/password
 ---
 
-Manual NOE VM Steps to run and verify NiFi flow
+## Manual NOE VM Steps to run and verify NiFi flow
 
 To build custom NiFi processors and install the newly built nar file
 
@@ -29,7 +29,7 @@ To build custom NiFi processors and install the newly built nar file
 
 ---
 
-To test the NiFi flow with the new or existing coustom NiFi processors nar file
+## To test the NiFi flow with the new or existing custom NiFi processors nar file
 
 - vim /etc/ssh/sshd_config
 - change PasswordAuthentication no to PasswordAuthentication yes
@@ -75,3 +75,46 @@ To test the NiFi flow with the new or existing coustom NiFi processors nar file
   [indicating the file went through sanitizer1, sanitizer2, and sanitizer3]
 - sudo cat /home/nifi/data/out/somemore.txt see s1, s2, s3 at the bottom of the file
 - sudo cat /home/nifi/data/out/evenmore.txt see s1, s2, s3 at the bottom of the file
+
+---
+
+## Vagrant VMs
+
+- Rocky9 (arm/aarch supported)
+
+  - Easy way
+
+    ```bash
+    ./vagrant.sh -a up -r "9" # default is rocky8
+    ```
+
+  - Manual way:
+
+    - Not arm/aarch platforms:
+
+      ```bash
+      export ROCKY_VERSION="9"
+      vagrant up
+      ```
+    
+    - arm/aarch platforms:
+
+      ```bash
+      export ROCKY_VERSION="9"
+      export OS_ARCH=arm64
+      vagrant up
+      ```
+
+- Rocky8 (not arm/aarch supported)
+
+  - Easy way:
+
+    ```bash
+    ./vagrant.sh -a up
+    ```
+
+  - Manual way:
+  
+    ```bash
+    vagrant up
+    ```

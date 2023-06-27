@@ -5,4 +5,3 @@
 /home/nifi/sanitizer1.sh &
 /home/nifi/sanitizer2.sh &
 /home/nifi/sanitizer3.sh &
-

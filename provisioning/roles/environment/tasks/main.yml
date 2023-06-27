@@ -3,18 +3,18 @@
   dnf:
     name: "*"
     state: latest
-  become: yes
+  become: true
 
 - name: DNF Update Cache
   dnf:
-    update_cache: yes
+    update_cache: true
     state: latest
 
 - name: YUM Update
   yum:
     name: "*"
     state: latest
-  become: yes
+  become: true
 
 - name: Install development tools
   dnf:
@@ -33,7 +33,13 @@
       - zip
       - unzip
     state: present
-  become: yes
+  become: true
+
+# - name: Install Server with GUI, ensures VM has GUI
+#   dnf:
+#     name: "@Server with GUI"
+#     state: present
+#   become: true
 
 - name: Install Python & Pip
   dnf:
@@ -41,61 +47,61 @@
       - python3
       - python3-pip
     state: latest
-  become: yes
+  become: true
 
 - name: Install MESA Drivers
   dnf:
     name:
       - mesa-dri-drivers
-  become: yes
+  become: true
 
 - name: Install Java 17
   dnf:
     name:
       - java-17-openjdk
       - java-17-openjdk-devel
-  become: yes
+  become: true
 
 - name: Set Java Version
-  shell: sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el8.x86_64/bin/java
-  become: yes
+  shell: sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.{{ el_version }}.{{ ansible_architecture }}/bin/java
+  become: true
 
 - name: Set Java Compiler Version
-  shell: sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.el8.x86_64/bin/javac
-  become: yes
+  shell: sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-17.0.7.0.7-3.{{ el_version }}.{{ ansible_architecture }}/bin/javac
+  become: true
 
 - name: Copy Java-home.sh 
   copy:
-    src: ../files/java-home.sh
+    src: "{{ role_path }}/files/java-home.sh"
     dest: /etc/profile.d
     mode: 0644
     owner: root
     group: root
-  become: yes
+  become: true
 
 - name: Source Java Paths
   shell: "source /etc/profile.d/java-home.sh"
-  become: yes
+  become: true
 
 - name: Install Maven
   dnf:
     name:
       - maven
     state: latest
-  become: yes
+  become: true
 
 - name: Add nifi group
-  become: yes
+  become: true
   group:
     name: nifi
     state: present
 
 - name: Add nifi user
-  become: yes
+  become: true
   user:
     name: nifi
     group: nifi
-    createhome: yes
+    createhome: true
 
 - name: Create folder for latest version of NiFi
   file:
@@ -104,29 +110,31 @@
     owner: nifi
     group: nifi
     mode: 0755
-  become: yes
+  become: true
 
-- name: Download Version 1.21.0 of NiFi
+- name: Download Version {{ nifi_version }} of NiFi
   get_url:
-    url: https://archive.apache.org/dist/nifi/1.21.0/nifi-1.21.0-bin.zip
-    dest: /home/vagrant/nifi-1.21.0-bin.zip
+    url: https://archive.apache.org/dist/nifi/{{ nifi_version }}/nifi-{{ nifi_version }}-bin.zip
+    dest: "{{ home_dir }}/nifi-{{ nifi_version }}-bin.zip"
     mode: 0755
 
 - name: Unzip NiFi
-  shell: sudo unzip /home/vagrant/nifi-1.21.0-bin.zip -d /opt/nifi
+  shell: "unzip {{ home_dir }}/nifi-{{ nifi_version }}-bin.zip -d /opt/nifi"
+  become: true
   args:
-    creates: /opt/nifi/nifi-1.21.0
+    creates: /opt/nifi/nifi-{{ nifi_version }}
 
 - name: Download NiFi Tools
   get_url:
-    url: https://archive.apache.org/dist/nifi/1.21.0/nifi-toolkit-1.21.0-bin.zip
-    dest: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+    url: https://archive.apache.org/dist/nifi/{{ nifi_version }}/nifi-toolkit-{{ nifi_version }}-bin.zip
+    dest: "{{ home_dir }}/nifi-toolkit-{{ nifi_version }}-bin.zip"
     mode: 0755
 
 - name: Unzip NiFi Tools
-  shell: sudo unzip /home/vagrant/nifi-toolkit-1.21.0-bin.zip -d /opt/nifi
+  shell: "unzip {{ home_dir }}/nifi-toolkit-{{ nifi_version }}-bin.zip -d /opt/nifi"
+  become: true
   args:
-    creates: /opt/nifi/nifi-toolkit-1.21.0
+    creates: /opt/nifi/nifi-toolkit-{{ nifi_version }}
 
 - name: Create Folder for NiFi
   file:
@@ -135,48 +143,48 @@
     owner: nifi
     group: nifi
     mode: 0755
-    recurse: yes
-  become: yes
+    recurse: true
+  become: true
 
 - name: Create symlink from installed version of NiFi
   file:
-    src: /opt/nifi/nifi-1.21.0/
+    src: /opt/nifi/nifi-{{ nifi_version }}/
     path: /opt/nifi-latest
     state: link
     owner: nifi
     group: nifi
-  become: yes
+  become: true
 
 - name: Copy NiFi service to Vagrant machine
   copy:
-    src: ../files/nifi.service
+    src: "{{ role_path }}/files/nifi.service"
     dest: /etc/systemd/system/
     mode: 0755
     owner: root
-  become: yes
+  become: true
 
 - name: Create vagrant Downloads directory
   file:
-    path: "/home/vagrant/Downloads"
+    path: "{{ home_dir }}/Downloads"
     state: directory
     mode: 0755
     owner: vagrant
     group: vagrant
-  become: yes
+  become: true
   
 - name: Copy NiFi Template to Vagrant Downloads
   copy:
-    src: ../files/Nifi-NOE-Final-Template.xml
-    dest: /home/vagrant/Downloads
+    src: "{{ role_path }}/files/Nifi-NOE-Final-Template.xml"
+    dest: "{{ home_dir }}/Downloads"
     mode: 0666
     owner: vagrant
-  become: yes
+  become: true
 
 - name: Stop NiFi if running
   systemd:
     name: nifi
     state: stopped
-  become: yes
+  become: true
 
 - name: Create NiFi data directory
   file:
@@ -191,7 +199,7 @@
     - /home/nifi/data/hold
     - /home/nifi/data/error
     - /home/nifi/data/reports
-  become: yes
+  become: true
 
 - name: Copy initial test files to Nifi hold diretory
   copy:
@@ -201,10 +209,10 @@
     group: nifi
     mode: 0755
   with_items:
-    - ../files/some.txt
-    - ../files/somemore.txt
-    - ../files/evenmore.txt
-  become: yes
+    - "{{ role_path }}/files/some.txt"
+    - "{{ role_path }}/files/somemore.txt"
+    - "{{ role_path }}/files/evenmore.txt"
+  become: true
 
 - name: Copy mock script files to Nifi home
   copy:
@@ -214,42 +222,42 @@
     group: nifi
     mode: 0755
   with_items:
-    - ../files/analyzer1.sh
-    - ../files/analyzer2.sh
-    - ../files/analyzer2.sh
-    - ../files/sanitizer1.sh
-    - ../files/sanitizer2.sh
-    - ../files/sanitizer3.sh
-    - ../files/setup-nifi-mock_env.sh
-    - ../files/start-nifi-mock-processors.sh
-    - ../files/stop-nifi-mock-processors.sh
-  become: yes
+    - "{{ role_path }}/files/analyzer1.sh"
+    - "{{ role_path }}/files/analyzer2.sh"
+    - "{{ role_path }}/files/analyzer2.sh"
+    - "{{ role_path }}/files/sanitizer1.sh"
+    - "{{ role_path }}/files/sanitizer2.sh"
+    - "{{ role_path }}/files/sanitizer3.sh"
+    - "{{ role_path }}/files/setup-nifi-mock_env.sh"
+    - "{{ role_path }}/files/start-nifi-mock-processors.sh"
+    - "{{ role_path }}/files/stop-nifi-mock-processors.sh"
+  become: true
 
 - name: Copy siaft-processors nar file to NiFi directory 
   copy:
-    src: ../files/siaft-processors.nar
-    dest: /opt/nifi/nifi-1.21.0/lib/
+    src: "{{ role_path }}/files/siaft-processors.nar"
+    dest: /opt/nifi/nifi-{{ nifi_version }}/lib/
     mode: 0755
     owner: nifi
     group: nifi
-  become: yes
+  become: true
 
-- name: Download Version 3.1.4 of mariadb client
+- name: Download Version {{ mariadb_client_version }} of mariadb client
   get_url:
-    url: https://dlm.mariadb.com/2912798/Connectors/java/connector-java-3.1.4/mariadb-java-client-3.1.4.jar
-    dest: /opt/nifi/nifi-1.21.0/lib/mariadb-java-client-3.1.4.jar
+    url: https://dlm.mariadb.com/2912798/Connectors/java/connector-java-{{ mariadb_client_version }}/mariadb-java-client-{{ mariadb_client_version }}.jar
+    dest: /opt/nifi/nifi-{{ nifi_version }}/lib/mariadb-java-client-{{ mariadb_client_version }}.jar
     owner: nifi
     group: nifi
     mode: 0755
-  become: yes
+  become: true
 
 - name: Enable NiFi Service and Start NiFi
   systemd:
-    daemon-reload: yes
+    daemon-reload: true
     name: nifi
     state: started
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
   
 - name: Install MESA graphics libraries
   dnf:
@@ -258,65 +266,64 @@
       - mesa-libEGL
       - xorg-x11-server-common
     state: latest
-  become: yes
+  become: true
 
 - name: Install Firefox
   yum:
     name: firefox
     state: latest
-  become: yes
+  become: true
 
 - name: Set Timezone
   timezone:
     name: America/New_York
-  become: yes
+  become: true
 
 - name: Install Git
   dnf:
     name: git
     state: latest
-  become: yes
+  become: true
 
 - name: Copy moretools Install Script
   copy:
-    src: ../files/moretools.sh
-    dest: /home/vagrant
+    src: "{{ role_path }}/files/moretools.sh"
+    dest: "{{ home_dir }}"
     mode: 0755
     owner: vagrant
     group: vagrant
-  become: yes
+  become: true
 
 - name: Run moretools install script
-  shell: /home/vagrant/moretools.sh
-  become: yes
+  shell: "{{ home_dir }}/moretools.sh"
+  become: true
 
 - name: Set DISPLAY value for x-server
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: "{{ home_dir }}/.bashrc"
     insertafter: EOF
     line: 'export DISPLAY="10.0.2.2:0.0"'
     state: present
 
 - name: Source .bashrc file
-  shell: source /home/vagrant/.bashrc
+  shell: "source {{ home_dir }}/.bashrc"
 
 - name: Remove NiFi zip file
   file:
-    path: /home/vagrant/nifi-1.21.0-bin.zip
+    path: "{{ home_dir }}/nifi-{{ nifi_version }}-bin.zip"
     state: absent
 
 - name: Remove NiFi Toolkit zip file
   file:
-    path: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+    path: "{{ home_dir }}/nifi-toolkit-{{ nifi_version }}-bin.zip"
     state: absent
 
 - name: Re-create empty NiFi file so not re-downloaded on provision failure
-  command: touch /home/vagrant/nifi-1.21.0-bin.zip
+  command: touch /home/vagrant/nifi-{{ nifi_version }}-bin.zip
   args:
-    creates: /home/vagrant/nifi-1.21.0-bin.zip
+    creates: /home/vagrant/nifi-{{ nifi_version }}-bin.zip
 
 - name: Re-create empty NiFi tool file so not re-downloaded on provision failure
-  command: touch /home/vagrant/nifi-toolkit-1.21.0-bin.zip
+  command: touch /home/vagrant/nifi-toolkit-{{ nifi_version }}-bin.zip
   args:
-    creates: /home/vagrant/nifi-toolkit-1.21.0-bin.zip
-
+    creates: /home/vagrant/nifi-toolkit-{{ nifi_version }}-bin.zip
